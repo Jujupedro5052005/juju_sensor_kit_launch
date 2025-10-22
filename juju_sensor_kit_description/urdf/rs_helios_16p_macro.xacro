@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="rs_helios_16p_macro" params="parent x y z roll pitch yaw">
+  <link name="rs_helios_16p_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="rs_helios_16p_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="rs_helios_16p_link"/>
+    <origin rpy="${roll} ${pitch} ${yaw}" xyz="${x} ${y} ${z}"/>
+  </joint>
+</xacro:macro>
+</robot>

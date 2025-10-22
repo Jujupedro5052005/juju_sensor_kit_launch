@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="ars408_macro" params="parent x y z roll pitch yaw">
+  <link name="ars408">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="ars408_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="ars408"/>
+    <origin rpy="${roll} ${pitch} ${yaw}" xyz="${x} ${y} ${z}"/>
+  </joint>
+</xacro:macro>
+</robot>
