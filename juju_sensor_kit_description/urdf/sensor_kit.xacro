@@ -2,16 +2,16 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="sensor_kit_macro" params="parent x y z roll pitch yaw">
       
-    <xacro:arg name="config_dir" default="$(find orbi_sensor_kit_description)/config"/>
+    <xacro:arg name="config_dir" default="$(find juju_sensor_kit_description)/config"/>
 
     <xacro:property name="sensor_kit_base_link" value="sensor_kit_base_link"/>
     <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensor_kit_calibration.yaml')}"/>
     
     <!-- Inclui o xacro do LIDAR RS-Helios-16P -->
-    <xacro:include filename="$(find orbi_sensor_kit_description)/urdf/rs_helios_16p_macro.xacro"/>
+    <xacro:include filename="$(find juju_sensor_kit_description)/urdf/rs_helios_16p_macro.xacro"/>
     
     <!-- Inclui o xacro do RADAR ARS408 -->
-    <xacro:include filename="$(find orbi_sensor_kit_description)/urdf/ars408_macro.xacro"/>
+    <xacro:include filename="$(find juju_sensor_kit_description)/urdf/ars408_macro.xacro"/>
 
     <!-- Base do sensor kit -->
     <joint name="${sensor_kit_base_link}_joint" type="fixed">

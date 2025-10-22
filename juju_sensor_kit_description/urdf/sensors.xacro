@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot name="vehicle" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Diretório da calibração -->
-  <xacro:arg name="config_dir" default="$(find orbi_sensor_kit_description)/config"/>
+  <xacro:arg name="config_dir" default="$(find juju_sensor_kit_description)/config"/>
 
   <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensors_calibration.yaml')}"/>
 
   <!-- Inclui o sensor kit com LIDAR RS-Helios-16P e RADAR ARS408-->
-  <xacro:include filename="$(find orbi_sensor_kit_description)/urdf/sensor_kit.xacro"/>
+  <xacro:include filename="$(find juju_sensor_kit_description)/urdf/sensor_kit.xacro"/>
 
   <!-- Aplica a macro do sensor kit -->
   <xacro:sensor_kit_macro

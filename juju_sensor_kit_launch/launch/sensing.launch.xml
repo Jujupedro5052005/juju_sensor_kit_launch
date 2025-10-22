@@ -9,14 +9,14 @@
 
   <group>
     <!-- LiDAR Driver -->
-    <include file="$(find-pkg-share orbi_sensor_kit_launch)/launch/lidar.launch.xml">
+    <include file="$(find-pkg-share juju_sensor_kit_launch)/launch/lidar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)"/>
       <arg name="launch_rviz" value="$(var launch_rviz)"/>
       <arg name="rviz_file" value="$(var rviz_file)"/>
     </include>
     
     <!-- ARS408 -->   
-    <include file="$(find-pkg-share orbi_sensor_kit_launch)/launch/radar.launch.xml">
+    <include file="$(find-pkg-share juju_sensor_kit_launch)/launch/radar.launch.xml">
       <arg name="launch_driver" value="$(var launch_driver)"/>
       <arg name="launch_rviz" value="$(var launch_rviz)"/>
       <arg name="rviz_file" value="$(var rviz_file)"/>
