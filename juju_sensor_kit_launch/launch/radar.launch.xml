@@ -1,0 +1,43 @@
+<launch>
+
+  <arg name="launch_driver" default="true"/>
+  <arg name="launch_rviz" default="false"/>
+  <arg name="rviz_file" default="$(find-pkg-share pe_ars408_ros)/rviz/rviz2.rviz"/>
+
+  <group>
+    <push-ros-namespace namespace="radar"/>
+    
+    <!-- <include file="$(find-pkg-share pe_ars408_ros)/launch/continental_ars408_socket_can.launch.xml" if="$(var launch_driver)" /> -->
+    <include file="$(find-pkg-share pe_ars408_ros)/launch/continental_ars408_socket_can.launch.xml" />
+    
+    <!-- OBS: se quiser retirar o filtro de ruidos, basta comentar este include e mudar o topico de entrada
+              do conversor msgs para /radar_objects -->    
+    <!-- Filtro de ruidos -->
+    <include file="$(find-pkg-share radar_tracks_noise_filter)/launch/radar_tracks_noise_filter.launch.xml">
+      <arg name="input/tracks" value="/radar_objects" />
+      <arg name="output/noise_tracks" value="/noise_objects" />
+      <arg name="output/filtered_tracks" value="/filtered_objects" />
+    </include>
+    
+    <!-- Conversor de RadarTracks para DetectedObjects -->
+    <include file="$(find-pkg-share radar_tracks_msgs_converter)/launch/radar_tracks_msgs_converter.launch.xml">
+      <!-- <arg name="input/radar_objects" value="/radar_objects" /> -->
+      <arg name="input/radar_objects" value="/filtered_objects" />
+      <arg name="input/odometry" value="/localization/kinematic_state"/>
+      <!-- <arg name="output/radar_detected_objects" value="/perception/object_recognition/detection/radar/objects" /> -->
+      <arg name="output/radar_detected_objects" value="/sensing/radar/detected_objects" /> 
+      <arg name="output/radar_tracked_objects" value="/sensing/radar/tracked_objects"/>      
+    </include>
+
+    <node
+      pkg="rviz2"
+      exec="rviz2"
+      name="rviz2"
+      output="screen"
+      args="-d $(var rviz_file)"
+      if="$(var launch_rviz)"/>
+      
+  </group>
+  
+</launch>
+
